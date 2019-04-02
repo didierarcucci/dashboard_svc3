@@ -1,10 +1,13 @@
 const Estimate = require('../models').Estimate;
+const EstimateComponent = require('../models').EstimateComponent;
+
 var sequelize = require('sequelize');
 
 module.exports = {
     list(req, res) {
       return Estimate
         .findAll({
+          include: [{ model: EstimateComponent, as: 'components' }],
           order: [
             ['updatedAt', 'DESC']
           ]
@@ -15,7 +18,10 @@ module.exports = {
   
     getById(req, res) {
       return Estimate
-        .findById(req.params.id)
+        .findById(
+          req.params.id,
+          { include: [{ model: EstimateComponent, as: 'components' }] }
+        )
         .then((estimate) => {
           if (!estimate) {
             return res.status(404).send({

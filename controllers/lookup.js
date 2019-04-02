@@ -31,7 +31,7 @@ module.exports = {
           }],
           order: [
             'code',
-            [{ model: LookupValue, as: 'lookupValues' }, 'value', 'ASC']
+            [{ model: LookupValue, as: 'lookupValues' }, 'code', 'ASC']
           ],
         })
         .then((lookups) => res.status(200).send(lookups))

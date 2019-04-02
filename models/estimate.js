@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Estimate.associate = function(models) {
     // associations can be defined here
+    Estimate.hasMany(models.EstimateComponent, {
+      foreignKey: 'estimateId',
+      as: 'components'
+    });
   };
   return Estimate;
 };

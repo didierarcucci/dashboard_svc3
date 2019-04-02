@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-const resourceController = require('../controllers').resource;
-const lookupController   = require('../controllers').lookup;
-const actualController   = require('../controllers').actual;
-const kpiController      = require('../controllers').kpi;
-const roleController     = require('../controllers').role;
-const estimateController = require('../controllers').estimate;
+const resourceController  = require('../controllers').resource;
+const lookupController    = require('../controllers').lookup;
+const actualController    = require('../controllers').actual;
+const kpiController       = require('../controllers').kpi;
+const roleController      = require('../controllers').role;
+const estimateController  = require('../controllers').estimate;
+const componentController = require('../controllers').component;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -33,6 +34,12 @@ router.get   ('/api/estimate/:id', estimateController.getById);
 router.post  ('/api/estimate'    , estimateController.add    );
 router.patch ('/api/estimate/:id', estimateController.update );
 router.delete('/api/estimate/:id', estimateController.delete );
+
+/* CRUD functions for estimate components controller. */
+router.get   ('/api/component/:id', componentController.getById);
+router.post  ('/api/component'    , componentController.add    );
+router.patch ('/api/component/:id', componentController.update );
+router.delete('/api/component/:id', componentController.delete );
 
 /* Resource KPIs */
 router.get   ('/api/resourcecountbyrole', resourceController.countByRole);
